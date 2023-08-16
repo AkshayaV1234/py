@@ -10,7 +10,9 @@ user = APIRouter()
 async def find_all_users():
     return serializeList(conn.Test.user.find())
 
-
+@user.get('/{id}')
+async def find_one_user(id):
+     return serializeDict(conn.Test.user.find_one({"_id":ObjectId(id)}))
 
 @user.post('/')
 async def create_user(user: User):
